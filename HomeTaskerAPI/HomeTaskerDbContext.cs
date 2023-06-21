@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HomeTaskerAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeTaskerAPI
 {
