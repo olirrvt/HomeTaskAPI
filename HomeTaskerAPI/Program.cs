@@ -6,6 +6,9 @@ namespace HomeTaskerAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Libera Injeção de Dependencia
+            builder.Services.AddDbContext<HomeTaskerDbContext>();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
