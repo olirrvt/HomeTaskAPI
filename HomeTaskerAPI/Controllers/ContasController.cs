@@ -101,7 +101,7 @@ namespace HomeTaskerAPI.Controllers
 
         [HttpDelete]
         [Route("ContaApp/{id}/Apagar")]
-        public async Task<IActionResult> DeleteContaAsync(
+        public async Task<IActionResult> deleteContaAsync(
             [FromServices] HomeTaskerDbContext homeTaskerDbContext,
             [FromRoute] int id )
         {
