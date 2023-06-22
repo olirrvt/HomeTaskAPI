@@ -10,6 +10,34 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class ContasController : ControllerBase
     {
+
+        [HttpGet]
+        [Route("Contas")]
+        public async Task<IActionResult> getAllAsync(
+            [FromServices] HomeTaskerDbContext homeTaskerDbContext)
+        {
+            var contas = await homeTaskerDbContext
+                .Contas
+                .AsNoTracking()
+                .ToListAsync();
+
+            return contas == null ? NotFound() : Ok(contas);
+        }
+
+        [HttpGet]
+        [Route("Conta/{id}")]
+        public async Task<IActionResult> getByIdAsync(
+            [FromServices] HomeTaskerDbContext homeTaskerDbContext,
+            [FromRoute] int id)
+        {
+            var conta = await homeTaskerDbContext
+                .Contas
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return conta == null ? NotFound() : Ok(conta);
+        }
+
         [HttpPost]
         [Route("ContaApp/{id}")]
         public async Task<IActionResult> regContasAsync(
@@ -39,7 +67,64 @@ namespace HomeTaskerAPI.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Created($"Contas/ContaApp/{conta.Id}", conta);
+            return Created($"Contas/ContaApp/{morador.Id}", conta);
+        }
+
+        [HttpPut]
+        [Route("ContaApp/{id}/Pagar")]
+        public async Task<IActionResult> ContaPagaAsync(
+            [FromServices] HomeTaskerDbContext homeTaskerDbContext,
+            [FromRoute] int id)
+        {
+            var conta = await homeTaskerDbContext
+                .Contas
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (conta == null)
+            {
+                return NotFound("Pessoa não encontrada!");
+            }
+
+            conta.Status = "Pago";
+
+            try
+            {
+                await homeTaskerDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("ContaApp/{id}/Apagar")]
+        public async Task<IActionResult> DeleteContaAsync(
+            [FromServices] HomeTaskerDbContext homeTaskerDbContext,
+            [FromRoute] int id )
+        {
+            var cont = await homeTaskerDbContext
+                .Contas
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (cont == null)
+            {
+                return BadRequest("Conta não encontrada!");
+            }
+
+            try
+            {
+                homeTaskerDbContext.Contas.Remove(cont);
+                await homeTaskerDbContext.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

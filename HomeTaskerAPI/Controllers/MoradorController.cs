@@ -17,6 +17,7 @@ namespace HomeTaskerAPI.Controllers
         {
             var moradores = await homeTaskerDbContext
                 .Moradores
+                .Include(m => m.Conta)
                 .AsNoTracking() // Objetos não precisam ser rastreados para a atualização
                 .ToListAsync(); // Recebe uma lista de moradores de forma assícrona
 
@@ -30,7 +31,9 @@ namespace HomeTaskerAPI.Controllers
             [FromRoute] int id)
         {
             var morador = await homeTaskerDbContext
-                .Moradores.AsNoTracking()
+                .Moradores
+                .Include(m => m.Conta)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);  // Pega o Primeiro registro que tenha o id solicitado
 
             return morador == null ? NotFound() : Ok(morador);
