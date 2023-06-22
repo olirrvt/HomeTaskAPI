@@ -126,5 +126,41 @@ namespace HomeTaskerAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        [Route("ContaApp/{id}/Editar")]
+        public async Task<IActionResult> PutAsyncContas(
+            [FromServices] HomeTaskerDbContext homeTaskerDbContext,
+            [FromBody] Conta conta,
+            [FromRoute] int id )
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Model inválida");
+            }
+
+            var co = await homeTaskerDbContext
+                .Contas
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (co == null)
+            {
+                return NotFound("Conta não encontrada!");
+            }
+
+            try
+            {
+                co.Valor = conta.Valor;
+                co.DataVencimento = conta.DataVencimento;
+
+                homeTaskerDbContext.Contas.Update(co);
+                await homeTaskerDbContext.SaveChangesAsync();
+                return Ok(co);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
