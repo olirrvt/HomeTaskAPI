@@ -52,7 +52,7 @@ namespace HomeTaskerAPI.Controllers
             {
                 await homeTaskerDbContext.Moradores.AddAsync(moradore);
                 await homeTaskerDbContext.SaveChangesAsync();
-                return Created($"Morador/morador/{moradore.Id}", moradore);
+                return Created($"Morador/Morador/{moradore.Id}", moradore);
             }
             catch (Exception ex)
             {
