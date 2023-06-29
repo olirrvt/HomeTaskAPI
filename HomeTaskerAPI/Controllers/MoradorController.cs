@@ -31,8 +31,8 @@ namespace HomeTaskerAPI.Controllers
         {
             var morador = await homeTaskerDbContext
                 .Moradores
-                .Include(m => m.Conta)
-                .Include(m => m.Reservas)
+                .Include(m => m.Conta).Include(r => r.Reservas).Include(oc => oc.Ocorrencia)
+                .Include(s => s.Servicos).Include(p => p.Produtos).Include(v => v.Visitantes)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);  // Pega o Primeiro registro que tenha o id solicitado
 
@@ -86,6 +86,9 @@ namespace HomeTaskerAPI.Controllers
             try
             {
                 m.Nome = moradore.Nome;
+                m.Apartamento = moradore.Apartamento;
+                m.Senha = moradore.Senha;
+                m.Email = moradore.Email;
 
                 homeTaskerDbContext.Moradores.Update(m);
                 await homeTaskerDbContext.SaveChangesAsync();

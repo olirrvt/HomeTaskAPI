@@ -111,7 +111,7 @@ namespace HomeTaskerAPI.Controllers
 
             if (cont == null)
             {
-                return BadRequest("Conta não encontrada!");
+                return NotFound("Conta não encontrada!");
             }
 
             try

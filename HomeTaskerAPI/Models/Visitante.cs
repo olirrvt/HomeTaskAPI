@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace HomeTaskerAPI.Models
 {
@@ -15,6 +16,7 @@ namespace HomeTaskerAPI.Models
 
         public int? MoradorId { get; set; }
 
+        [JsonIgnore]
         public virtual Moradore? Morador { get; set; }
     }
 }
