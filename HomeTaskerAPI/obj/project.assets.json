@@ -3859,11 +3859,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Taylor\\Desktop\\HomeTaskerAPI\\HomeTaskerAPI\\HomeTaskerAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Taylor\\Desktop\\HomeTaskAPI\\HomeTaskerAPI\\HomeTaskerAPI.csproj",
       "projectName": "HomeTaskerAPI",
-      "projectPath": "C:\\Users\\Taylor\\Desktop\\HomeTaskerAPI\\HomeTaskerAPI\\HomeTaskerAPI.csproj",
+      "projectPath": "C:\\Users\\Taylor\\Desktop\\HomeTaskAPI\\HomeTaskerAPI\\HomeTaskerAPI.csproj",
       "packagesPath": "C:\\Users\\Taylor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Taylor\\Desktop\\HomeTaskerAPI\\HomeTaskerAPI\\obj\\",
+      "outputPath": "C:\\Users\\Taylor\\Desktop\\HomeTaskAPI\\HomeTaskerAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

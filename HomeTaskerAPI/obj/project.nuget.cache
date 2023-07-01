@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9EIKwGw0u/dHWguziTnfCFnDglJ67XQAbaV4OHm/R3LHhIebPiHRjqwG2XFxQCgUx44PrQNqrdF0x1nd0+sQCw==",
+  "dgSpecHash": "AP5seTjwPkjna3IuuAqmpLS7FVsjAFmzOUIrgWWlBwLBU0WY5t5WWuxz7YOG+VVsp7mKMlCfQjjYWlB+aRxbRg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Taylor\\Desktop\\HomeTaskerAPI\\HomeTaskerAPI\\HomeTaskerAPI.csproj",
+  "projectFilePath": "C:\\Users\\Taylor\\Desktop\\HomeTaskAPI\\HomeTaskerAPI\\HomeTaskerAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Taylor\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Taylor\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeTaskerAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MoradorController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace HomeTaskerAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Morador/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> getByIdAsync(
             [FromServices] HomeTaskerDbContext homeTaskerDbContext,
             [FromRoute] int id)
@@ -64,7 +64,7 @@ namespace HomeTaskerAPI.Controllers
         }
 
         [HttpPut]
-        [Route("Morador/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> PutAsync(
             [FromServices] HomeTaskerDbContext homeTaskerDbContext,
             [FromBody] Moradore moradore,
@@ -101,7 +101,7 @@ namespace HomeTaskerAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("Morador/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteAsync(
             [FromServices] HomeTaskerDbContext homeTaskerDbContext,
             [FromRoute] int id)
