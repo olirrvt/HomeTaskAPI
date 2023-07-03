@@ -1,4 +1,5 @@
 ﻿using HomeTaskerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class AvisosController : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         [Route("Avisos")]
         public async Task<IActionResult> getAllAsync(
@@ -22,6 +24,7 @@ namespace HomeTaskerAPI.Controllers
             return avisos == null ? NotFound() : Ok(avisos);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Aviso/{id}")]
         public async Task<IActionResult> getByIdAsync(
@@ -36,6 +39,7 @@ namespace HomeTaskerAPI.Controllers
             return aviso == null ? NotFound() : Ok(aviso);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Aviso")]
         public async Task<IActionResult> PostAsync(
@@ -59,6 +63,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Aviso/{id}")]
         public async Task<IActionResult> PutAsync(
@@ -95,6 +100,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Aviso/{id}")]
         public async Task<IActionResult> DeleteAsyncAvisos(

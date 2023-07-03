@@ -1,4 +1,5 @@
 ﻿using HomeTaskerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class ServicosController : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         [Route("Servicos")]
         public async Task<IActionResult> getAllAsyncServices(
@@ -22,6 +24,7 @@ namespace HomeTaskerAPI.Controllers
             return servicos == null ? NotFound() : Ok(servicos);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Servico/{id}")]
         public async Task<IActionResult> getByIdAsync(
@@ -36,6 +39,7 @@ namespace HomeTaskerAPI.Controllers
             return servico == null ? NotFound() : Ok(servico);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Servico/{id}")]
         public async Task<IActionResult> registerServicesAsync(
@@ -68,6 +72,7 @@ namespace HomeTaskerAPI.Controllers
             return Created($"Servicos/Servico/{morador.Id}", servico);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Servico/{id}/Editar")]
         public async Task<IActionResult> PutAsyncServices(
@@ -104,6 +109,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Servico/{id}/StatusDoServico")]
         public async Task<IActionResult> StatusPutAsync(
@@ -133,6 +139,7 @@ namespace HomeTaskerAPI.Controllers
 
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Servico/{id}/Apagar")]
         public async Task<IActionResult> deleteServiceAsync(

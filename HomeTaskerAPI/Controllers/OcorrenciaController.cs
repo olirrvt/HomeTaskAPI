@@ -1,4 +1,5 @@
 ﻿using HomeTaskerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class OcorrenciaController : ControllerBase
     {
+
+        [Authorize]
         [HttpGet]
         [Route("Ocorrencias")]
         public async Task<IActionResult> getAllAsyncOcorrencias(
@@ -22,6 +25,7 @@ namespace HomeTaskerAPI.Controllers
             return ocorrencias == null ? NotFound() : Ok(ocorrencias);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Ocorrencia/{id}")]
         public async Task<IActionResult> getByIdAsyncOcorrencia(
@@ -36,6 +40,7 @@ namespace HomeTaskerAPI.Controllers
             return ocorrencia == null ? NotFound() : Ok(ocorrencia);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Ocorrencia/{id}")]
         public async Task<IActionResult> registerOcorrenciaAsync(
@@ -68,6 +73,7 @@ namespace HomeTaskerAPI.Controllers
             return Created($"Ocorrencia/Ocorrencia/{morador.Id}", ocorrencia);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Ocorrencia/{id}/Editar")]
         public async Task<IActionResult> PutAsyncOcorrencias(
@@ -103,6 +109,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Ocorrencia/{id}/Apagar")]
         public async Task<IActionResult> deleteOcorrenciaAsync(

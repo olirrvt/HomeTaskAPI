@@ -1,4 +1,5 @@
 ﻿using HomeTaskerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class ReservasController : ControllerBase
     {
-
+        [Authorize]
         [HttpGet]
         [Route("Reservas")]
         public async Task<IActionResult> getAllAsyncReservas(
@@ -23,6 +24,7 @@ namespace HomeTaskerAPI.Controllers
             return reservas == null ? NotFound() : Ok(reservas);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Reserva/{id}")]
         public async Task<IActionResult> getByIdAsyncReserva(
@@ -37,7 +39,7 @@ namespace HomeTaskerAPI.Controllers
             return reserva == null ? NotFound() : Ok(reserva); 
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("Reserva/{id}")]
         public async Task<IActionResult> registReservaAsync(
@@ -70,7 +72,7 @@ namespace HomeTaskerAPI.Controllers
             return Created($"Reserva/Reserva/{morador.Id}", reserva);
         }
 
-
+        [Authorize]
         [HttpDelete]
         [Route("Reserva/{id}/Apagar")]
         public async Task<IActionResult> deleteReservaAsync(
@@ -99,7 +101,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPut]
         [Route("Reserva/{id}/Editar")]
         public async Task<IActionResult> PutAsyncReserva(

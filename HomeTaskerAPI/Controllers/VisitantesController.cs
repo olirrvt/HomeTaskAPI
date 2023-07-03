@@ -1,4 +1,5 @@
 ﻿using HomeTaskerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class VisitantesController : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         [Route("Visitantes")]
         public async Task<IActionResult> getAllAsync(
@@ -22,6 +24,7 @@ namespace HomeTaskerAPI.Controllers
             return visitantes == null ? NotFound() : Ok(visitantes);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Visitante/{id}")]
         public async Task<IActionResult> getByIdAsync(
@@ -36,7 +39,7 @@ namespace HomeTaskerAPI.Controllers
             return visitantes == null ? NotFound() : Ok(visitantes);
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route("Morador/{idMorador}/Visitantes")]
         public async Task<IActionResult> getVisitantesPorMoradorAsync(
@@ -52,6 +55,7 @@ namespace HomeTaskerAPI.Controllers
             return visitantes == null ? NotFound() : Ok(visitantes);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Visitantes/{id}/Cadastrar")]
         public async Task<IActionResult> registerVisitAsync(
@@ -84,6 +88,7 @@ namespace HomeTaskerAPI.Controllers
             return Created($"Visitantes/Visitantes/{morador.Id}", visitante);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Visitantes/{id}/Editar")]
         public async Task<IActionResult> putAsyncVisitantes(
@@ -120,6 +125,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Visitante/{id}/Apagar")]
         public async Task<IActionResult> deleteVisitanteAsync(

@@ -1,4 +1,5 @@
 ﻿using HomeTaskerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class ContasController : ControllerBase
     {
-
+        [Authorize]
         [HttpGet]
         [Route("Contas")]
         public async Task<IActionResult> getAllAsync(
@@ -24,6 +25,7 @@ namespace HomeTaskerAPI.Controllers
             return contas == null ? NotFound() : Ok(contas);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Conta/{id}")]
         public async Task<IActionResult> getByIdAsync(
@@ -38,6 +40,7 @@ namespace HomeTaskerAPI.Controllers
             return conta == null ? NotFound() : Ok(conta);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("ContaApp/{id}")]
         public async Task<IActionResult> regContasAsync(
@@ -70,6 +73,7 @@ namespace HomeTaskerAPI.Controllers
             return Created($"Contas/ContaApp/{morador.Id}", conta);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("ContaApp/{id}/Pagar")]
         public async Task<IActionResult> ContaPagaAsync(
@@ -99,6 +103,7 @@ namespace HomeTaskerAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("ContaApp/{id}/Apagar")]
         public async Task<IActionResult> deleteContaAsync(
@@ -127,6 +132,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("ContaApp/{id}/Editar")]
         public async Task<IActionResult> PutAsyncContas(

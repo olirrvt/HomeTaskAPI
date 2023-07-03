@@ -1,4 +1,5 @@
 ﻿using HomeTaskerAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class MoradorController : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         [Route("Moradores")]
         public async Task<IActionResult> getAllAsync(
@@ -25,6 +27,7 @@ namespace HomeTaskerAPI.Controllers
             return moradores == null ? NotFound() : Ok(moradores); // Retorno do método
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> getByIdAsync(
@@ -74,49 +77,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("Morador/Login")]
-        public async Task<IActionResult> LoginAsync(
-            [FromServices] HomeTaskerDbContext homeTaskerDbContext,
-            [FromBody] LoginModel loginModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                // Verificar o login e autenticar o usuário
-                var morador = await homeTaskerDbContext.Moradores
-                    .FirstOrDefaultAsync(m => m.Email == loginModel.Email);
-
-                if (morador == null)
-                {
-                    return Unauthorized("Credenciais inválidas");
-                }
-
-                using (var sha256 = SHA256.Create())
-                {
-                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(loginModel.Senha));
-                    var hashedPassword = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-
-                    if (hashedPassword != morador.Senha)
-                    {
-                        return Unauthorized("Credenciais inválidas");
-                    }
-                }
-
-                return Ok(morador);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-
-
+        [Authorize]
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> PutAsync(
@@ -154,6 +115,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteAsync(
