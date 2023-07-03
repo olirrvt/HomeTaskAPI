@@ -27,18 +27,6 @@ namespace HomeTaskerAPI
                             });
                 });
 
-            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-            builder.Services.AddCors(
-
-                options =>
-                {
-                    options.AddPolicy(MyAllowSpecificOrigins,
-                            policy =>
-                            {
-                                policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                            });
-                });
-
             // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
