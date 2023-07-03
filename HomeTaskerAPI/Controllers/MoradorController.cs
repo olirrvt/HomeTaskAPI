@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace HomeTaskerAPI.Controllers
 {
@@ -40,11 +42,11 @@ namespace HomeTaskerAPI.Controllers
         }
 
         [HttpPost]
-        [Route("Morador")]
+        [Route("Morador/Create")]
         public async Task<IActionResult> PostAsync(
             [FromServices] HomeTaskerDbContext homeTaskerDbContext,
             [FromBody] Moradore moradore
-            )
+        )
         {
             if (!ModelState.IsValid)
             {
@@ -53,6 +55,15 @@ namespace HomeTaskerAPI.Controllers
 
             try
             {
+                using (var sha256 = SHA256.Create())
+                {
+                    var hashedBytes = sha256.ComputeHash(Encoding
+                        .UTF8.GetBytes(moradore.Senha));
+                    var hashedPassword = BitConverter
+                        .ToString(hashedBytes).Replace("-", "").ToLower();
+                    moradore.Senha = hashedPassword;
+                }
+
                 await homeTaskerDbContext.Moradores.AddAsync(moradore);
                 await homeTaskerDbContext.SaveChangesAsync();
                 return Created($"Morador/Morador/{moradore.Id}", moradore);
@@ -62,6 +73,50 @@ namespace HomeTaskerAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpPost]
+        [Route("Morador/Login")]
+        public async Task<IActionResult> LoginAsync(
+            [FromServices] HomeTaskerDbContext homeTaskerDbContext,
+            [FromBody] LoginModel loginModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                // Verificar o login e autenticar o usuário
+                var morador = await homeTaskerDbContext.Moradores
+                    .FirstOrDefaultAsync(m => m.Email == loginModel.Email);
+
+                if (morador == null)
+                {
+                    return Unauthorized("Credenciais inválidas");
+                }
+
+                using (var sha256 = SHA256.Create())
+                {
+                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(loginModel.Senha));
+                    var hashedPassword = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                    if (hashedPassword != morador.Senha)
+                    {
+                        return Unauthorized("Credenciais inválidas");
+                    }
+                }
+
+                return Ok(morador);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
 
         [HttpPut]
         [Route("{id}")]

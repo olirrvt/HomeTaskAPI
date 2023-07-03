@@ -176,3 +176,4 @@ C:\Users\Taylor\Desktop\HomeTaskAPI\HomeTaskerAPI\obj\Debug\net6.0\refint\HomeTa
 C:\Users\Taylor\Desktop\HomeTaskAPI\HomeTaskerAPI\obj\Debug\net6.0\HomeTaskerAPI.pdb
 C:\Users\Taylor\Desktop\HomeTaskAPI\HomeTaskerAPI\obj\Debug\net6.0\HomeTaskerAPI.genruntimeconfig.cache
 C:\Users\Taylor\Desktop\HomeTaskAPI\HomeTaskerAPI\obj\Debug\net6.0\ref\HomeTaskerAPI.dll
+C:\Users\Taylor\Desktop\HomeTaskAPI\HomeTaskerAPI\bin\Debug\net6.0\BCrypt.Net-Next.dll
