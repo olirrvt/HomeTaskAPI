@@ -36,6 +36,22 @@ namespace HomeTaskerAPI.Controllers
             return visitantes == null ? NotFound() : Ok(visitantes);
         }
 
+
+        [HttpGet]
+        [Route("Morador/{idMorador}/Visitantes")]
+        public async Task<IActionResult> getVisitantesPorMoradorAsync(
+        [FromServices] HomeTaskerDbContext homeTaskerDbContext,
+        [FromRoute] int idMorador)
+        {
+            var visitantes = await homeTaskerDbContext
+                .Visitantes
+                .AsNoTracking()
+                .Where(v => v.MoradorId == idMorador)
+                .ToListAsync();
+
+            return visitantes == null ? NotFound() : Ok(visitantes);
+        }
+
         [HttpPost]
         [Route("Visitantes/{id}/Cadastrar")]
         public async Task<IActionResult> registerVisitAsync(
