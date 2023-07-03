@@ -74,7 +74,6 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
-
         [HttpPost]
         [Route("Morador/Login")]
         public async Task<IActionResult> LoginAsync(
