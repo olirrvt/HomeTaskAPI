@@ -16,7 +16,7 @@ namespace HomeTaskerAPI.Services
             {
                 Subject = new System.Security.Claims.ClaimsIdentity(new Claim[]
                 {
-                    new Claim("moradorId", morador.Id.ToString()),
+                    new Claim(ClaimTypes.Name, morador.Id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
