@@ -83,7 +83,7 @@ namespace HomeTaskerAPI.Controllers
         public async Task<IActionResult> PutAsync(
             [FromServices] HomeTaskerDbContext homeTaskerDbContext,
             [FromBody] Moradore moradore,
-            [FromRoute] int id )
+            [FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -100,10 +100,26 @@ namespace HomeTaskerAPI.Controllers
 
             try
             {
-                m.Nome = moradore.Nome;
-                m.Apartamento = moradore.Apartamento;
-                m.Senha = moradore.Senha;
-                m.Email = moradore.Email;
+                // Verificar cada propriedade antes de atribuir
+                if (!string.IsNullOrWhiteSpace(moradore.Nome))
+                {
+                    m.Nome = moradore.Nome;
+                }
+
+                if (!string.IsNullOrWhiteSpace(moradore.Apartamento))
+                {
+                    m.Apartamento = moradore.Apartamento;
+                }
+
+                if (!string.IsNullOrWhiteSpace(moradore.Senha))
+                {
+                    m.Senha = moradore.Senha;
+                }
+
+                if (!string.IsNullOrWhiteSpace(moradore.Email))
+                {
+                    m.Email = moradore.Email;
+                }
 
                 homeTaskerDbContext.Moradores.Update(m);
                 await homeTaskerDbContext.SaveChangesAsync();
@@ -137,9 +153,9 @@ namespace HomeTaskerAPI.Controllers
 
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest($"Erro ao salvar as alterações: {ex.InnerException?.Message}");
             }
         }
 

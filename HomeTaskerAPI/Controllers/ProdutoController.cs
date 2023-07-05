@@ -10,6 +10,7 @@ namespace HomeTaskerAPI.Controllers
     [ApiController]
     public class ProdutoController : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         [Route("Produtos")]
         public async Task<IActionResult> getAllAsync(
@@ -23,6 +24,7 @@ namespace HomeTaskerAPI.Controllers
             return produtos == null ? NotFound() : Ok(produtos);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Produto/{id}")]
         public async Task<IActionResult> getByIdAsync(
@@ -37,6 +39,7 @@ namespace HomeTaskerAPI.Controllers
             return produto == null ? NotFound() : Ok(produto);   
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Produto/{id}")]
         public async Task<IActionResult> registerProductAsync(
@@ -69,6 +72,7 @@ namespace HomeTaskerAPI.Controllers
             return Created($"Produto/Produto/{morador.Id}", produto);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Produto/{id}/Alterar")]
         public async Task<IActionResult> PutAsyncProducts(
@@ -122,6 +126,7 @@ namespace HomeTaskerAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Produto/{id}/Apagar")]
         public async Task<IActionResult> deleteProductAsync(
